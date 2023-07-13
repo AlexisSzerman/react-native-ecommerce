@@ -1,6 +1,6 @@
 export const colors = {
-    beige: "#FAF8F1",
-    yellow: "#FAEAB1",
-    gold:"#E5BA73",
-    brown: "#C58940"
+    orange: "#FF4C29",
+    blue: "#334756",
+    teal:"#2C394B",
+    navy: "#082032"
 }

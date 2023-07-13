@@ -5,13 +5,15 @@ import categories from '../Data/categories.json'
 
 import CategoryItem from '../Components/CategoryItem'
 
-const Home = () => {
+const Home = ({
+  setCategorySelected
+}) => {
   return (
-    <View  style= {styles.containerHome}>
+    <View style={styles.containerHome}>
         <FlatList
-            data={categories}
+            data = {categories}
             keyExtractor={category => category}
-            renderItem={({item}) => CategoryItem({item})}
+            renderItem={({item}) => CategoryItem({item, setCategorySelected})}
             showsVerticalScrollIndicator={false}
         />
     </View>
@@ -23,7 +25,7 @@ export default Home
 const styles = StyleSheet.create({
     containerHome:{
         height: '90%',
-        backgroundColor: colors.beige,
+        backgroundColor: colors.teal,
         alignItems: 'center'
     }
 })

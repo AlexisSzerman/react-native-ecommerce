@@ -15,13 +15,13 @@ export default Header
 const styles = StyleSheet.create({
     containerHeader:{
         height: '10%',
-        backgroundColor: colors.gold,
+        backgroundColor: colors.blue,
         justifyContent: 'center',
         alignItems:'center',
     },
     headerText:{
-        fontSize:25,
-        fontWeight: 'bold',
-        color: colors.beige
+        fontSize:33,
+        color: colors.orange,
+        fontFamily: 'LilitaOne'
     }
 })
