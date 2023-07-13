@@ -8,7 +8,7 @@ const ProductItem = ({ item }) => {
     <Card additionalStyle={styles.additionalStylesCard}>
       <View style={styles.contentContainer}>
         <Text style={styles.textCategory} numberOfLines={2} ellipsizeMode="tail"> 
-        //Encontré estas propiedades en la documentacion para que el texto no me empujara la imagen fuera de la Card
+        {/* Encontré estas propiedades en la documentacion para que el texto no me empujara la imagen fuera de la Card */}
           {item.title}
         </Text>
       </View>
