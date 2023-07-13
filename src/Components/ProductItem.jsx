@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Card from "./Card";
 import { colors } from "../Global/Theme";
@@ -6,7 +6,12 @@ import { colors } from "../Global/Theme";
 const ProductItem = ({ item }) => {
   return (
     <Card additionalStyle={styles.additionalStylesCard}>
-      <Text style={styles.textCategory}>{item.title}</Text>
+      <View style={styles.contentContainer}>
+        <Text style={styles.textCategory} numberOfLines={2} ellipsizeMode="tail"> 
+        //Encontré estas propiedades en la documentacion para que el texto no me empujara la imagen fuera de la Card
+          {item.title}
+        </Text>
+      </View>
       <Image
         resizeMode="cover"
         style={styles.image}
@@ -31,10 +36,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderColor: colors.orange,
   },
-  textCategory:{
+  contentContainer: {
+    flex: 1,
+    marginRight: 10,
+  },
+  textCategory: {
     color: colors.orange,
-    marginLeft: 10,
-    fontSize:18,
-    fontFamily: 'Raleway'
+    fontSize: 18,
+    fontFamily: "Raleway",
   }
 });
