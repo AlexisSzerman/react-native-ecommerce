@@ -5,7 +5,7 @@ import { colors } from '../Global/Theme'
 const Header = () => {
   return (
     <View style= {styles.containerHeader}>
-      <Text style= {styles.headerText}>Categories</Text>
+      <Text style= {styles.headerText}>E-Commerce</Text>
     </View>
   )
 }
@@ -14,10 +14,10 @@ export default Header
 
 const styles = StyleSheet.create({
     containerHeader:{
-        height: '10%',
         backgroundColor: colors.blue,
         justifyContent: 'center',
         alignItems:'center',
+        paddingVertical: 10
     },
     headerText:{
         fontSize:33,

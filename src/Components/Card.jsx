@@ -3,6 +3,7 @@ import React from "react";
 import { colors } from "../Global/Theme";
 
 const Card = ({ children, additionalStyle = []}) => {
+
   return <View style={[styles.containerCard, additionalStyle]}>{children}</View>;
 };
 
