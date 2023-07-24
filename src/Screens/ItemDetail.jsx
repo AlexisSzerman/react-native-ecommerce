@@ -30,9 +30,6 @@ const ItemDetail = ({ navigation, route }) => {
 
   return (
     <View style={orientation === "portrait" ? styles.mainContainer : styles.mainContainerLandscape}>
-      <Pressable style={styles.button} onPress={() => navigation.goBack()}>
-        <Text style={styles.buttonText}>Go back</Text>
-      </Pressable>
       {product ? (
         <View style={styles.productContainer}>
           <Image

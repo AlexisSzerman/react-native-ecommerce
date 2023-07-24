@@ -12,23 +12,40 @@ const Stack = createNativeStackNavigator()
 
 const Navigator = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={({ route }) => ({
-            header: () => {
-              return <Header />;
-            },
-          })}
-        >
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="ItemListCategory" component={ItemListCategory} />
-          <Stack.Screen name="ItemDetail" component={ItemDetail} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <SafeAreaView style = {styles.container}>
+        <NavigationContainer>
+            <Stack.Navigator
+                initialRouteName='Home'
+                screenOptions={
+                    ({route, navigation}) => (
+                        {
+                            header: () => {
+                                return <Header
+                                    route = {route}
+                                    navigation = {navigation}
+                                />
+                            },
+    
+                        }
+                    )
+                }            
+            >
+                <Stack.Screen 
+                    name='Home'
+                    component={Home}
+                />
+                <Stack.Screen
+                    name='ItemListCategory'
+                    component={ItemListCategory}
+                />
+                <Stack.Screen
+                    name='ItemDetail'
+                    component={ItemDetail}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
     </SafeAreaView>
-  );
+  )
 }
 
 export default Navigator

@@ -31,9 +31,6 @@ const Search = ({
                 <Pressable onPress={() => setKeyword("")}>
                     <FontAwesome5 name="eraser" size={iconSize} color={colors.orange} />
                 </Pressable>
-                <Pressable onPress={goBack}>
-                    <AntDesign name="back" size={iconSize} color={colors.orange} />
-                </Pressable>
             </View>
             {error ? (
                 <Text style={styles.textError}>{error}</Text>
