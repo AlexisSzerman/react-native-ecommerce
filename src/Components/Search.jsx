@@ -12,7 +12,6 @@ const Search = ({
 }) => {
     const [keyword, setKeyword] = useState("");
     const {width, height}  = useWindowDimensions();
-    console.log(width, height);
     const iconSize = width > 320 ? 24 : 18; /* Para poder controlar el tamaño de los iconos */
 
     return (

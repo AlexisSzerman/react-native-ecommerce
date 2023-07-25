@@ -13,9 +13,6 @@ import { colors } from "../Global/Theme";
 
 const ProductItem = ({ item, navigation }) => {
   const { height, width } = useWindowDimensions();
-
-  console.log(height, width);
-
   const onSelect = (id) => {
     navigation.navigate ('ItemDetail', {productId: item.id})
   };

@@ -4,10 +4,13 @@ import { colors } from '../Global/Theme'
 import { AntDesign } from "@expo/vector-icons";
 
 const Header = ({ route, navigation }) => {
-  let title
-  if (route.name === 'Home') title = 'Home'
-  if (route.name === 'ItemListCategory') title = route.params.category
-  if (route.name === 'ItemDetail') title = route.params.title
+    let title
+    if (route.name === 'Home') title = 'Home'
+    if (route.name === 'CartScreen') title = 'Cart'
+    else if (route.name === 'ItemListCategory') title = route.params.category
+    else if (route.name === 'ItemDetail') title = route.params.title
+    else title = route.name
+
   return (
       <View style={styles.containerHeader}>
           <Text style={styles.headerText}>{title}</Text>
