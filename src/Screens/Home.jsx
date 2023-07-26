@@ -4,12 +4,14 @@ import { colors } from '../Global/Theme'
 import categories from '../Data/categories.json'
 
 import CategoryItem from '../Components/CategoryItem'
+import Counter from '../Components/Counter'
 
 const Home = ({
   navigation
 }) => {
   return (
     <View style={styles.containerHome}>
+      <Counter/>
         <FlatList
             data = {categories}
             keyExtractor={category => category}

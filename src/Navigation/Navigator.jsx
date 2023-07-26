@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, View, Text } from "react-native";
+import { SafeAreaView, StyleSheet, View, Text, Platform } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "react-native";
