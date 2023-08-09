@@ -1,18 +1,31 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
 import { colors } from "../Global/Theme";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { removeCartItem } from "../Features/Cart/cartSlice";
+import { useDispatch } from "react-redux";
 
 const CartItem = ({ cartItem }) => {
     console.log(cartItem);
+    const dispatch = useDispatch()
+
+    const onRemove = () => {
+        dispatch(removeCartItem(cartItem.id)); 
+    };
+
+
+
     return (
-        <View style={styles.card} onPress={() => {}}>
+        <View style={styles.card}>
             <View style={styles.textContainer}>
                 <Text style={styles.text}>{cartItem.title} ({cartItem.quantity})</Text>
                 <Text style={styles.text2}>{cartItem.brand}</Text>
                 <Text style={styles.text2}>${cartItem.price}</Text>
             </View>
-            <MaterialCommunityIcons name="trash-can" size={30} color={colors.orange} />
+            <Pressable>
+            <MaterialCommunityIcons name="trash-can" size={30} color={colors.orange} onPress={onRemove}/>
+            </Pressable>
+
         </View>
     );
 };
@@ -50,7 +63,3 @@ const styles = StyleSheet.create({
     },
 });
 
-
-/* const deleteTask = (taskId) => {
-    setList((prevList) => prevList.filter((task) => task.id !== taskId));
-  }; */

@@ -9,12 +9,18 @@ import {
 import React, { useEffect, useState } from "react";
 import allProducts from "../Data/products.json";
 import { colors } from "../Global/Theme";
+/* import Counter from '../Components/Counter' */
+import { useDispatch } from "react-redux";
+import { addCartItem } from "../Features/Cart/cartSlice";
 
 const ItemDetail = ({ navigation, route }) => {
   const { productId: idSelected } = route.params;
   const [product, setProduct] = useState(null);
   const [orientation, setOrientation] = useState("portrait");
   const { width, height } = useWindowDimensions();
+  const dispatch = useDispatch()
+
+
 
   useEffect(() => {
     if (width > height) setOrientation("landscape");
@@ -27,6 +33,13 @@ const ItemDetail = ({ navigation, route }) => {
     );
     setProduct(productSelected);
   }, [idSelected]);
+
+  const onAddCart = () => {
+    dispatch(addCartItem({
+        ...product,
+        quantity: 1
+    }))
+}
 
   return (
     <View style={orientation === "portrait" ? styles.mainContainer : styles.mainContainerLandscape}>
@@ -42,9 +55,10 @@ const ItemDetail = ({ navigation, route }) => {
             <Text style={styles.textDescription}>{product.description}</Text>
             <Text style={styles.textPrice}>Price: ${product.price}</Text>
           </View>
+{/*           <Counter/> */}
           <View style={styles.addToCartButton}>
             <Pressable>
-              <Text style={styles.addToCartButtonText}>Add to Cart</Text>
+              <Text style={styles.addToCartButtonText} onPress={onAddCart} >Add to Cart</Text>
             </Pressable>
           </View>
         </View>

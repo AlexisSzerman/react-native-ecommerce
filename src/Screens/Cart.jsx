@@ -1,12 +1,25 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import CartData from '../Data/cart.json'
 import CartItem from '../Components/CartItem';
+import { useSelector } from 'react-redux';
+import { usePostCartMutation } from '../Services/shopServices';
+
 import { colors } from "../Global/Theme";
 
 const Cart = () => {
-    const total = CartData.reduce((acumulador, currentItem) => acumulador += currentItem.price * currentItem.quantity, 0) 
-    
+    const {items: CartData, total, updatedAt, user} = useSelector(state => state.cartReducer.value)
+    const [triggerPostCart, result] = usePostCartMutation()
+
+    const onConfirm = () => {
+        if (total > 0) {
+            triggerPostCart({ items: CartData, total, user, updatedAt });
+        } else {
+            console.log("There's no items in the Cart");
+        }
+    }
+
+    console.log(result);
+
     return (
     <View style={styles.container}>
        <FlatList
@@ -19,14 +32,16 @@ const Cart = () => {
                     />
                 )
             }}
-        />
+        />            
+        <Text style={styles.totalText}>Total: ${total}</Text>
+        
         <View style={styles.totalContainer}>
-            <Pressable>
+            <Pressable onPress = {onConfirm}>
                 <Text style={styles.confirmButtonText}>
                     Confirm
                 </Text>
             </Pressable>
-            <Text style={styles.confirmButtonText}>Total: ${total}</Text>
+
         </View> 
     </View>
   )
@@ -42,7 +57,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.teal
     },
     totalContainer: {
-        height: 80,
+        height: 50,
         width:200,
         paddingVertical: 10,
         paddingHorizontal: 20,
@@ -64,6 +79,12 @@ const styles = StyleSheet.create({
         color: colors.orange,
         fontSize: 18,
         fontFamily: "Raleway",
+    },
+    totalText: {
+        color: colors.orange,
+        fontSize: 30,
+        fontFamily: "Raleway",
+        marginBottom: 20
     }
 })
 
