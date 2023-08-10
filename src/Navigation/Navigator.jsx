@@ -1,24 +1,32 @@
 import { SafeAreaView, StyleSheet, View, Text, Platform } from "react-native";
 import React from "react";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "react-native";
 
 import ShopStack from "./ShopStack";
 import CartStack from "./CartStack";
 import OrderStack from "./OrderStack";
+import AuthStack from "./AuthStack";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { colors } from "../Global/Theme";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useSelector } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
 const Navigator = () => {
-  return (
-    <SafeAreaView style={styles.container}>
+
+  const {email} = useSelector(state => state.userReducer.value)
+return (
+  <SafeAreaView style = {styles.container}>
       <NavigationContainer>
-        <Tab.Navigator
+          {
+              email ? 
+         <Tab.Navigator
           screenOptions={{
             headerShown: false,
             tabBarShowLabel: false,
@@ -82,7 +90,9 @@ const Navigator = () => {
               },
             }}
           />
-        </Tab.Navigator>
+        </Tab.Navigator> 
+        : <AuthStack/>
+        }
       </NavigationContainer>
     </SafeAreaView>
   );
@@ -115,7 +125,7 @@ const styles = StyleSheet.create({
   },
   tabContainer: {
     alignItems: "center",
-    justifyContent: "center", // Center the content vertically
-    flexDirection: "column", // Stack the icon and text on top of each other
+    justifyContent: "center",
+    flexDirection: "column", 
   }
 });
