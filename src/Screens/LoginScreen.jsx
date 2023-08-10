@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   subLink: {
     fontSize: 14,
-    color: colors.navy,
+    color: colors.orange,
     fontFamily: "Raleway",
   },
 });

@@ -11,10 +11,12 @@ import AuthStack from "./AuthStack";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome } from '@expo/vector-icons';
 import { colors } from "../Global/Theme";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useSelector } from "react-redux";
+import MyProfileStack from './MyProfileStack'
 
 const Tab = createBottomTabNavigator();
 
@@ -90,6 +92,25 @@ return (
               },
             }}
           />
+           <Tab.Screen
+                        name="MyProfile"
+                        component={MyProfileStack}
+                        options={{
+                            tabBarIcon: ({ focused }) => {
+                                return (
+                                    <View style={styles.tabContainer}>
+                                        <FontAwesome
+                                            name="user-circle-o"
+                                            size={30}
+                                            color={focused ? colors.orange : colors.blue}
+                                        />
+                                        <Text style={[styles.tabText, { color: focused ? colors.orange : colors.blue }]}>
+                      Profile</Text>
+                                    </View>
+                                );
+                            },
+                        }}
+                    />
         </Tab.Navigator> 
         : <AuthStack/>
         }

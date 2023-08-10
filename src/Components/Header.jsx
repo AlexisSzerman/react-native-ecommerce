@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   pressableLogOut: {
     position: "absolute",
     right: 20,
-    top: "50%",
+    top: "25%",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
