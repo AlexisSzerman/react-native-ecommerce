@@ -5,7 +5,7 @@ import { colors } from "../Global/Theme";
 const AddButton = ({
     title = "",
     onPress = () => {},
-    color = colors.pink,
+    color = colors.orange,
 }) => {
     return (
         <Pressable

@@ -12,6 +12,7 @@ import { colors } from "../Global/Theme";
 /* import Counter from '../Components/Counter' */
 import { useDispatch } from "react-redux";
 import { addCartItem } from "../Features/Cart/cartSlice";
+import { Toast } from 'react-native-toast-message/lib/src/Toast'
 
 const ItemDetail = ({ navigation, route }) => {
   const { productId: idSelected } = route.params;
@@ -36,9 +37,15 @@ const ItemDetail = ({ navigation, route }) => {
 
   const onAddCart = () => {
     dispatch(addCartItem({
-        ...product,
-        quantity: 1
+      ...product,
+      quantity: 1
     }))
+    Toast.show({
+      type: "success",
+      text1: "Item added to the Cart",
+      autoHide: true,
+      visibilityTime: 3000
+    })
 }
 
   return (
@@ -58,6 +65,7 @@ const ItemDetail = ({ navigation, route }) => {
 {/*           <Counter/> */}
           <View style={styles.addToCartButton}>
             <Pressable>
+            <Toast/>
               <Text style={styles.addToCartButtonText} onPress={onAddCart} >Add to Cart</Text>
             </Pressable>
           </View>

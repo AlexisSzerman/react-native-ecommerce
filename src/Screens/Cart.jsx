@@ -1,24 +1,41 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import CartItem from '../Components/CartItem';
-import { useSelector } from 'react-redux';
-import { usePostCartMutation } from '../Services/shopServices';
-
 import { colors } from "../Global/Theme";
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux';
+import { usePostCartMutation } from '../Services/shopServices';
+import { setUserCart } from '../Features/Cart/cartSlice'
+import { useGetOrdersQuery } from '../Services/shopServices'
+import { removeAllCartItems } from '../Features/Cart/cartSlice'
+import { Toast } from 'react-native-toast-message/lib/src/Toast'
 
 const Cart = () => {
-    const {items: CartData, total, updatedAt, user} = useSelector(state => state.cartReducer.value)
+    const {items: CartData, total, updatedAt} = useSelector(state => state.cartReducer.value)
     const [triggerPostCart, result] = usePostCartMutation()
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.cartReducer.value.user)
+    const {data: orders, refetch} = useGetOrdersQuery(user)
 
-    const onConfirm = () => {
-        if (total > 0) {
-            triggerPostCart({ items: CartData, total, user, updatedAt });
-        } else {
-            console.log("There's no items in the Cart");
+    useEffect(() => {
+        if (result.isSuccess) {
+          refetch()
+          dispatch(setUserCart(user))
+          dispatch(removeAllCartItems())
         }
-    }
+      }, [result.isSuccess, dispatch, user, refetch])
 
-    console.log(result);
+      const onConfirm = () => {
+        const order = { items: CartData, total, user, updatedAt }
+        triggerPostCart(order)
+        Toast.show({
+          type: "success",
+          text1: "Your order was succesfuly created",
+          autoHide: true,
+          visibilityTime: 3000,
+          position: "top"
+        })
+      }
+    
 
     return (
     <View style={styles.container}>

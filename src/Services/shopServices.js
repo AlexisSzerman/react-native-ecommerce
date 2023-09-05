@@ -1,4 +1,4 @@
-import {createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { realtime_database_url } from "../Database/firebaseConfig"
 
 export const shopApi = createApi({
@@ -33,27 +33,34 @@ export const shopApi = createApi({
             })
         }),
         getProfileImage: builder.query({
-            query: (localId) => `profileImages/${localId}.json`,
+            query: (localId) => `profileImages/${localId}.json`
         }),
-        //Aquí hacemos un put para que no me genere ninguna clave nueva de por medio.
         postProfileImage: builder.mutation({
             query: ({image, localId}) => ({
                 url: `profileImages/${localId}.json`,
                 method: "PUT",
                 body: {
                     image: image
-                },
-            }),
+                }
+            })
         }),
+        getOrders: builder.query({
+            query: (email) => `orders.json?orderBy="user"&equalTo="${email}"`,
+            transformResponse: (response) => {
+                const ordersTransformed = Object.values(response)
+                return (ordersTransformed)
+            }
+        })
     })
 })
 
 export const {
-    useGetCategoriesQuery, 
-    useGetProductsQuery, 
+    useGetCategoriesQuery,
+    useGetProductsQuery,
     useGetProductsByCategoryQuery,
     useGetProductByIdQuery,
     usePostCartMutation,
     useGetProfileImageQuery,
     usePostProfileImageMutation,
+    useGetOrdersQuery
 } = shopApi

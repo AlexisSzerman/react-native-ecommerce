@@ -7,20 +7,21 @@ import { useSignInMutation } from "../Services/authServices";
 import { isAtLeastSixCharacters, isValidEmail } from "../Validations/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../Features/User/userSlice";
+import { insertSession } from "../SQLite";
+import { Toast } from 'react-native-toast-message/lib/src/Toast'
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const [errorEmail, setErrorEmail] = useState('')
     const [errorPassword, setErrorPassword] = useState('')
-
     const dispatch = useDispatch()
-
     const [triggerSignIn, resultSignIn] = useSignInMutation();
+
+
+
     const onSubmit = () => {
 
-        //Submit logic with validations
         const isValidVariableEmail = isValidEmail(email)
         const isCorrectPassword = isAtLeastSixCharacters(password)
 
@@ -38,20 +39,42 @@ const LoginScreen = ({ navigation }) => {
         else setErrorPassword('')
     };
 
-    console.log(resultSignIn);
     useEffect(()=> {
-        if(resultSignIn.isSuccess) {
-            dispatch(setUser({
-                email: resultSignIn.data.email,
-                idToken: resultSignIn.data.idToken
-            }))
-        }
-    }, [resultSignIn])
+      (async ()=> {
+          try {
+              if(resultSignIn.isSuccess) {
+                  console.log('inserting Session');
+                  const response = await insertSession({
+                      idToken: resultSignIn.data.idToken,
+                      localId: resultSignIn.data.localId,
+                      email: resultSignIn.data.email,
+                  })
+                  console.log('Session inserted: ');
+                  console.log(response);
+
+                  dispatch(setUser({
+                      email: resultSignIn.data.email,
+                      idToken: resultSignIn.data.idToken,
+                      localId: resultSignIn.data.localId,
+                      profileImage: "",
+                  }))
+              }
+          } catch (error) {
+            Toast.show({
+                type: "error",
+                text1: "An error ocurred while signing in",
+                autoHide: true,
+                visibilityTime: 3000
+              })
+          }
+      })()
+  }, [resultSignIn])
 
   return (
     <View style={styles.main}>
       <View style={styles.container}>
         <Text style={styles.title}>Login to start</Text>
+        <Toast/>
         <InputForm
           label={"email"}
           onChange={setEmail}
