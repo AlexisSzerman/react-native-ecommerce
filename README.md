@@ -1,34 +1,42 @@
-<h1 align="center">Welcome to eternalecommerce 👋</h1>
+<h1 align="center">Eternalecommerce 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> E-Commerce realizado con React Native
+> E-Commerce realizado con React Native para Desarrollo de aplicaciones de Coderhouse
 
 ### 🏠 [Homepage](https://github.com/AlexisSzerman/react-native-ecommerce)
 
-## Install
+## Tecnologías utilizadas
+- React Native
+- Expo
+- Redux
+- SQLite
+- Firebase Authentication y Realtime Database
+
+## Fuentes
+
+Las fuentes utilizadas son: [LilitaOne](https://fonts.google.com/specimen/Lilita+One) 
+[Raleway](https://fonts.google.com/specimen/Raleway) ambas de Google Fonts
+
+## Instalación
 
 ```sh
 npm install
 ```
 
-## Usage
+## Utilización
 
 ```sh
 npm run start
 ```
 
-## Author
+## Autor
 
 👤 **Alexis Szerman**
 
 * Github: [@AlexisSzerman](https://github.com/AlexisSzerman)
 * LinkedIn: [@https:\/\/www.linkedin.com\/in\/alexis-szerman\/](https://linkedin.com/in/https:\/\/www.linkedin.com\/in\/alexis-szerman\/)
 
-## Show your support
 
-Give a ⭐️ if this project helped you!
 
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
